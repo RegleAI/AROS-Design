@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | AROS Design</title>
+    <link rel="icon" type="image/png" href="Logos/FAV Icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css?v=2">
+    <style>
+        /* ===== PROJECT PAGE HERO ===== */
+        .project-hero {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: var(--color-primary-dark);
+            padding-top: var(--nav-height);
+            overflow: hidden;
+        }
+
+        .project-hero-bg {
+            position: absolute;
+            inset: 0;
+            opacity: 0.4;
+        }
+
+        .project-hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .project-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(10, 22, 40, 0.6), rgba(10, 22, 40, 0.9));
+            z-index: 1;
+        }
+
+        .project-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: var(--spacing-xl) var(--spacing-md);
+        }
+
+        .project-hero h1 {
+            color: var(--color-white);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .project-hero p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* ===== PROJECT NAVIGATION ===== */
+        .project-nav {
+            background: var(--color-white);
+            padding: var(--spacing-md) 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: var(--nav-height);
+            z-index: 100;
+        }
+
+        .project-nav-inner {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-xl);
+            flex-wrap: wrap;
+        }
+
+        .project-nav a {
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+            padding: var(--spacing-sm) 0;
+            position: relative;
+            transition: var(--transition-fast);
+        }
+
+        .project-nav a:hover,
+        .project-nav a.active {
+            color: var(--color-primary-dark);
+        }
+
+        .project-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-accent);
+            transition: var(--transition-fast);
+        }
+
+        .project-nav a:hover::after,
+        .project-nav a.active::after {
+            width: 100%;
+        }
+
+        /* ===== PROJECT SECTION ===== */
+        .project-section {
+            padding: var(--spacing-xxxl) 0;
+        }
+
+        .project-section:nth-child(even) {
+            background: var(--color-light-bg);
+        }
+
+        .project-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-xl);
+            margin-bottom: var(--spacing-xl);
+            align-items: end;
+        }
+
+        .project-header-info {
+            max-width: 600px;
+        }
+
+        .project-header-info .label {
+            color: var(--color-accent);
+            margin-bottom: var(--spacing-sm);
+            display: block;
+        }
+
+        .project-header-info h2 {
+            margin-bottom: var(--spacing-md);
+            color: var(--color-primary-dark);
+        }
+
+        .project-header-info p {
+            color: var(--color-text-light);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .project-meta {
+            display: flex;
+            gap: var(--spacing-xl);
+            flex-wrap: wrap;
+        }
+
+        .project-meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-xs);
+        }
+
+        .project-meta-item span:first-child {
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+        }
+
+        .project-meta-item span:last-child {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            color: var(--color-primary-dark);
+        }
+
+        @media (max-width: 768px) {
+            .project-header {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== PROJECT GALLERY ===== */
+        .project-gallery {
+            display: grid;
+            gap: var(--spacing-md);
+        }
+
+        /* Featured large image */
+        .gallery-featured {
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .gallery-featured img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s ease;
+        }
+
+        .gallery-featured:hover img {
+            transform: scale(1.03);
+        }
+
+        /* Gallery grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-md);
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(10, 22, 40, 0);
+            transition: var(--transition-fast);
+        }
+
+        .gallery-item:hover::after {
+            background: rgba(10, 22, 40, 0.2);
+        }
+
+        /* Wide gallery item */
+        .gallery-item.wide {
+            grid-column: span 2;
+            aspect-ratio: 2/1;
+        }
+
+        /* Tall gallery item */
+        .gallery-item.tall {
+            grid-row: span 2;
+            aspect-ratio: auto;
+        }
+
+        @media (max-width: 1024px) {
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .gallery-item.wide {
+                grid-column: span 1;
+                aspect-ratio: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery-item.tall {
+                grid-row: span 1;
+                aspect-ratio: 1;
+            }
+        }
+
+        /* ===== MASONRY GALLERY ===== */
+        .gallery-masonry {
+            column-count: 3;
+            column-gap: var(--spacing-md);
+        }
+
+        .gallery-masonry .gallery-item {
+            aspect-ratio: auto;
+            margin-bottom: var(--spacing-md);
+            break-inside: avoid;
+        }
+
+        .gallery-masonry .gallery-item img {
+            width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 1024px) {
+            .gallery-masonry {
+                column-count: 2;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .gallery-masonry {
+                column-count: 1;
+            }
+        }
+
+        /* ===== HORIZONTAL SCROLL GALLERY ===== */
+        .gallery-scroll {
+            display: flex;
+            gap: var(--spacing-md);
+            overflow-x: auto;
+            padding-bottom: var(--spacing-md);
+            scroll-snap-type: x mandatory;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .gallery-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .gallery-scroll .gallery-item {
+            flex: 0 0 auto;
+            width: 400px;
+            aspect-ratio: 4/3;
+            scroll-snap-align: start;
+        }
+
+        @media (max-width: 768px) {
+            .gallery-scroll .gallery-item {
+                width: 300px;
+            }
+        }
+
+        /* ===== PROJECT STATS ===== */
+        .project-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-xl);
+            padding-top: var(--spacing-xl);
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .project-stat {
+            text-align: center;
+        }
+
+        .project-stat-number {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            color: var(--color-accent);
+            line-height: 1;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .project-stat-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--color-text-light);
+        }
+
+        @media (max-width: 768px) {
+            .project-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* ===== LIGHTBOX ===== */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 22, 40, 0.95);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: var(--spacing-lg);
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: var(--spacing-md);
+            right: var(--spacing-md);
+            width: 50px;
+            height: 50px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-fast);
+        }
+
+        .lightbox-close:hover {
+            background: var(--color-accent);
+            border-color: var(--color-accent);
+        }
+
+        .lightbox-close svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--color-white);
+        }
+
+        .lightbox-close:hover svg {
+            stroke: var(--color-primary-dark);
+        }
+
+        .lightbox-image {
+            max-width: 90vw;
+            max-height: 85vh;
+            object-fit: contain;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-fast);
+        }
+
+        .lightbox-nav:hover {
+            background: var(--color-accent);
+            border-color: var(--color-accent);
+        }
+
+        .lightbox-nav svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--color-white);
+            fill: none;
+        }
+
+        .lightbox-nav:hover svg {
+            stroke: var(--color-primary-dark);
+        }
+
+        .lightbox-prev {
+            left: var(--spacing-md);
+        }
+
+        .lightbox-next {
+            right: var(--spacing-md);
+        }
+
+        /* ===== CTA BANNER ===== */
+        .cta-banner {
+            background: var(--color-primary-dark);
+            padding: var(--spacing-xxl) 0;
+            text-align: center;
+        }
+
+        .cta-banner h2 {
+            color: var(--color-white);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .cta-banner p {
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto var(--spacing-lg);
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="nav nav-dark" id="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo-link">
+                <img src="Logos/White The Aros.png" alt="AROS Design" class="nav-logo nav-logo-light">
+                <img src="Logos/AROS Design Logo.svg?v=2" alt="AROS Design" class="nav-logo nav-logo-dark">
+            </a>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="services.html">Services</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="contact.html" class="nav-cta">Get a Quote</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- PROJECT HERO -->
+    <section class="project-hero">
+        <div class="project-hero-bg">
+            <img src="Photos_Optimized/RGM/FH_LurotBrand_6RussellGardensMews_TypRes-1.jpg" alt="Featured Project">
+        </div>
+        <div class="project-hero-content fade-in">
+            <span class="label" style="color: var(--color-accent); margin-bottom: var(--spacing-md); display: block;">Our Portfolio</span>
+            <h1>Featured Projects</h1>
+            <p>High-specification residential and commercial developments delivered through our integrated turnkey approach across the UK.</p>
+        </div>
+    </section>
+
+    <!-- PROJECT NAVIGATION -->
+    <div class="project-nav">
+        <div class="container">
+            <div class="project-nav-inner">
+                <a href="#rgm" class="active">Holland Park</a>
+                <a href="#pembridge">Notting Hill</a>
+                <a href="#george-bank">The Gower</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- PROJECT 1: RUSSELL GARDENS MEWS -->
+    <section class="project-section" id="rgm">
+        <div class="container">
+            <div class="project-header fade-in">
+                <div class="project-header-info">
+                    <span class="label">New Build</span>
+                    <h2>Holland Park</h2>
+                    <p>A stunning new build mews house in Holland Park, combining contemporary design with classic London architecture. This project showcases our ability to deliver complex new build developments from planning through to completion.</p>
+                </div>
+                <div class="project-meta">
+                    <div class="project-meta-item">
+                        <span>Location</span>
+                        <span>Holland Park, London</span>
+                    </div>
+                    <div class="project-meta-item">
+                        <span>Type</span>
+                        <span>New Build</span>
+                    </div>
+                    <div class="project-meta-item">
+                        <span>Services</span>
+                        <span>Full Turnkey</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Image -->
+            <div class="project-gallery">
+                <div class="gallery-featured fade-in" data-gallery="rgm">
+                    <img src="Photos_Optimized/RGM/FH_LurotBrand_6RussellGardensMews_TypRes-1.jpg" alt="Holland Park Exterior">
+                </div>
+
+                <!-- Gallery Grid -->
+                <div class="gallery-grid">
+                    <div class="gallery-item wide fade-in" data-gallery="rgm">
+                        <img src="Photos_Optimized/RGM/FH_LurotBrand_6RussellGardensMews_TypRes-2.jpg" alt="Interior View">
+                    </div>
+                    <div class="gallery-item fade-in" data-gallery="rgm">
+                        <img src="Photos_Optimized/RGM/FH_LurotBrand_6RussellGardensMews_TypRes-3.jpg" alt="Living Space">
+                    </div>
+                    <div class="gallery-item fade-in" data-gallery="rgm">
+                        <img src="Photos_Optimized/RGM/FH_LurotBrand_6RussellGardensMews_TypRes-4.jpg" alt="Kitchen">
+                    </div>
+                    <div class="gallery-item tall fade-in" data-gallery="rgm">
+                        <img src="Photos_Optimized/RGM/FH_LurotBrand_6RussellGardensMews_TypRes-5.jpg" alt="Staircase">
+                    </div>
+                    <div class="gallery-item fade-in" data-gallery="rgm">
+                        <img src="Photos_Optimized/RGM/FH_LurotBrand_6RussellGardensMews_TypRes-6.jpg" alt="Bedroom">
+                    </div>
+                    <div class="gallery-item fade-in" data-gallery="rgm">
+                        <img src="Photos_Optimized/RGM/FH_LurotBrand_6RussellGardensMews_TypRes-7.jpg" alt="Bathroom">
+                    </div>
+                    <div class="gallery-item fade-in" data-gallery="rgm">
+                        <img src="Photos_Optimized/RGM/FH_LurotBrand_6RussellGardensMews_TypRes-8.jpg" alt="Detail">
+                    </div>
+                    <div class="gallery-item wide fade-in" data-gallery="rgm">
+                        <img src="Photos_Optimized/RGM/FH_LurotBrand_6RussellGardensMews_TypRes-9.jpg" alt="Living Area">
+                    </div>
+                    <div class="gallery-item fade-in" data-gallery="rgm">
+                        <img src="Photos_Optimized/RGM/FH_LurotBrand_6RussellGardensMews_TypRes-10.jpg" alt="Interior">
+                    </div>
+                    <div class="gallery-item fade-in" data-gallery="rgm">
+                        <img src="Photos_Optimized/RGM/FH_LurotBrand_6RussellGardensMews_TypRes-11.jpg" alt="Interior">
+                    </div>
+                    <div class="gallery-item fade-in" data-gallery="rgm">
+                        <img src="Photos_Optimized/RGM/FH_LurotBrand_6RussellGardensMews_TypRes-12.jpg" alt="Interior">
+                    </div>
+                    <div class="gallery-item fade-in" data-gallery="rgm">
+                        <img src="Photos_Optimized/RGM/FH_LurotBrand_6RussellGardensMews_TypRes-13.jpg" alt="Interior">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PROJECT 2: 59 PEMBRIDGE -->
+    <section class="project-section" id="pembridge">
+        <div class="container">
+            <div class="project-header fade-in">
+                <div class="project-header-info">
+                    <span class="label">Renovation</span>
+                    <h2>Notting Hill</h2>
+                    <p>A comprehensive renovation and upgrade of a dilapidated building in Notting Hill, transforming it into high-specification residential units. This project demonstrates our expertise in complex refurbishment and compliance management.</p>
+                </div>
+                <div class="project-meta">
+                    <div class="project-meta-item">
+                        <span>Location</span>
+                        <span>Notting Hill, London</span>
+                    </div>
+                    <div class="project-meta-item">
+                        <span>Type</span>
+                        <span>Renovation</span>
+                    </div>
+                    <div class="project-meta-item">
+                        <span>Services</span>
+                        <span>Full Turnkey</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Image -->
+            <div class="project-gallery">
+                <div class="gallery-featured fade-in" data-gallery="pembridge">
+                    <img src="Photos_Optimized/59 Pembridge/Cover.jpg" alt="Notting Hill">
+                </div>
+
+                <!-- Horizontal Scroll Gallery -->
+                <div class="gallery-scroll">
+                    <div class="gallery-item fade-in" data-gallery="pembridge">
+                        <img src="Photos_Optimized/59 Pembridge/889A3045_HDR.jpg" alt="Interior">
+                    </div>
+                    <div class="gallery-item fade-in" data-gallery="pembridge">
+                        <img src="Photos_Optimized/59 Pembridge/889A3066_HDR-2.jpg" alt="Living Space">
+                    </div>
+                    <div class="gallery-item fade-in" data-gallery="pembridge">
+                        <img src="Photos_Optimized/59 Pembridge/889A3075_HDR.jpg" alt="Kitchen">
+                    </div>
+                    <div class="gallery-item fade-in" data-gallery="pembridge">
+                        <img src="Photos_Optimized/59 Pembridge/889A3078_HDR.jpg" alt="Detail">
+                    </div>
+                    <div class="gallery-item fade-in" data-gallery="pembridge">
+                        <img src="Photos_Optimized/59 Pembridge/889A3093_HDR-2.jpg" alt="Bedroom">
+                    </div>
+                    <div class="gallery-item fade-in" data-gallery="pembridge">
+                        <img src="Photos_Optimized/59 Pembridge/889A3099_HDR.jpg" alt="Bathroom">
+                    </div>
+                    <div class="gallery-item fade-in" data-gallery="pembridge">
+                        <img src="Photos_Optimized/59 Pembridge/889A3111_HDR.jpg" alt="Interior">
+                    </div>
+                    <div class="gallery-item fade-in" data-gallery="pembridge">
+                        <img src="Photos_Optimized/59 Pembridge/889A3114_HDR.jpg" alt="Interior">
+                    </div>
+                </div>
+
+                <!-- Masonry Gallery -->
+                <div class="gallery-masonry" style="margin-top: var(--spacing-md);">
+                    <div class="gallery-item fade-in" data-gallery="pembridge">
+                        <img src="Photos_Optimized/59 Pembridge/889A3129_HDR.jpg" alt="Interior">
+                    </div>
+                    <div class="gallery-item fade-in" data-gallery="pembridge">
+                        <img src="Photos_Optimized/59 Pembridge/889A3168_HDR.jpg" alt="Interior">
+                    </div>
+                    <div class="gallery-item fade-in" data-gallery="pembridge">
+                        <img src="Photos_Optimized/59 Pembridge/889A3189_HDR.jpg" alt="Interior">
+                    </div>
+                    <div class="gallery-item fade-in" data-gallery="pembridge">
+                        <img src="Photos_Optimized/59 Pembridge/889A3195_HDR-2.jpg" alt="Interior">
+                    </div>
+                    <div class="gallery-item fade-in" data-gallery="pembridge">
+                        <img src="Photos_Optimized/59 Pembridge/889A3204_HDR-2.jpg" alt="Interior">
+                    </div>
+                    <div class="gallery-item fade-in" data-gallery="pembridge">
+                        <img src="Photos_Optimized/59 Pembridge/889A3273_HDR.jpg" alt="Interior">
+                    </div>
+                    <div class="gallery-item fade-in" data-gallery="pembridge">
+                        <img src="Photos_Optimized/59 Pembridge/889A3282_HDR.jpg" alt="Interior">
+                    </div>
+                    <div class="gallery-item fade-in" data-gallery="pembridge">
+                        <img src="Photos_Optimized/59 Pembridge/889A3291_HDR.jpg" alt="Interior">
+                    </div>
+                    <div class="gallery-item fade-in" data-gallery="pembridge">
+                        <img src="Photos_Optimized/59 Pembridge/889A3321_HDR.jpg" alt="Interior">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Gallery -->
+            <div style="margin-top: var(--spacing-md);">
+                <div class="gallery-grid">
+                    <div class="gallery-item fade-in" data-gallery="pembridge">
+                        <img src="Photos_Optimized/59 Pembridge/Bed 1.png" alt="Bedroom Design 1">
+                    </div>
+                    <div class="gallery-item fade-in" data-gallery="pembridge">
+                        <img src="Photos_Optimized/59 Pembridge/Bed 2.png" alt="Bedroom Design 2">
+                    </div>
+                    <div class="gallery-item fade-in" data-gallery="pembridge">
+                        <img src="Photos_Optimized/59 Pembridge/Bed 3.png" alt="Bedroom Design 3">
+                    </div>
+                    <div class="gallery-item fade-in" data-gallery="pembridge">
+                        <img src="Photos_Optimized/59 Pembridge/Bed 4.png" alt="Bedroom Design 4">
+                    </div>
+                    <div class="gallery-item fade-in" data-gallery="pembridge">
+                        <img src="Photos_Optimized/59 Pembridge/Bed 5.png" alt="Bedroom Design 5">
+                    </div>
+                    <div class="gallery-item fade-in" data-gallery="pembridge">
+                        <img src="Photos_Optimized/59 Pembridge/Bed 6.png" alt="Bedroom Design 6">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECT 3: GEORGE BANK -->
+    <section class="project-section" id="george-bank">
+        <div class="container">
+            <div class="project-header fade-in">
+                <div class="project-header-info">
+                    <span class="label">Conversion</span>
+                    <h2>The Gower</h2>
+                    <p>Conversion of a traditional Welsh property in the stunning Gower Peninsula into multi-unit flats. This project showcases our expertise in working within sensitive landscapes while meeting complex ecological and planning requirements.</p>
+                </div>
+                <div class="project-meta">
+                    <div class="project-meta-item">
+                        <span>Location</span>
+                        <span>Gower, Wales</span>
+                    </div>
+                    <div class="project-meta-item">
+                        <span>Type</span>
+                        <span>Conversion</span>
+                    </div>
+                    <div class="project-meta-item">
+                        <span>Services</span>
+                        <span>Planning & Ecology</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Image -->
+            <div class="project-gallery">
+                <div class="gallery-featured fade-in" data-gallery="george">
+                    <img src="Photos_Optimized/George Bank/IMG_6609..JPG" alt="The Gower Exterior">
+                </div>
+
+                <!-- Gallery Grid -->
+                <div class="gallery-grid">
+                    <div class="gallery-item wide fade-in" data-gallery="george">
+                        <img src="Photos_Optimized/George Bank/IMG_6639..JPG" alt="Property View">
+                    </div>
+                    <div class="gallery-item fade-in" data-gallery="george">
+                        <img src="Photos_Optimized/George Bank/IMG_6486..JPG" alt="Exterior">
+                    </div>
+                    <div class="gallery-item fade-in" data-gallery="george">
+                        <img src="Photos_Optimized/George Bank/IMG_6594..JPG" alt="Landscape">
+                    </div>
+                    <div class="gallery-item fade-in" data-gallery="george">
+                        <img src="Photos_Optimized/George Bank/IMG_6759..JPG" alt="View">
+                    </div>
+                    <div class="gallery-item fade-in" data-gallery="george">
+                        <img src="Photos_Optimized/George Bank/IMG_6852..JPG" alt="Detail">
+                    </div>
+                    <div class="gallery-item wide fade-in" data-gallery="george">
+                        <img src="Photos_Optimized/George Bank/IMG_6879..JPG" alt="Landscape View">
+                    </div>
+                    <div class="gallery-item fade-in" data-gallery="george">
+                        <img src="Photos_Optimized/George Bank/IMG_6951..JPG" alt="Property">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <section class="cta-banner">
+        <div class="container fade-in">
+            <h2>Start Your Project</h2>
+            <p>Ready to bring your vision to life? Get in touch to discuss how we can deliver your project through our integrated turnkey approach.</p>
+            <a href="contact.html" class="btn btn-primary btn-large">Get in Touch</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-main">
+                <div class="footer-logo-wrapper">
+                    <img src="Logos/White The Aros.png" alt="AROS Design" class="footer-logo">
+                </div>
+                <nav class="footer-nav">
+                    <a href="services.html">Services</a>
+                    <a href="projects.html">Projects</a>
+                    <a href="about.html">About</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
+                <div class="footer-tagline">
+                    Turnkey Design & Technical Consultancy<br>United Kingdom
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; AROS Design 2025. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Terms</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2">
+                <path d="M18 6L6 18M6 6l12 12"/>
+            </svg>
+        </button>
+        <button class="lightbox-nav lightbox-prev" id="lightboxPrev">
+            <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <img class="lightbox-image" id="lightboxImage" src="" alt="Gallery Image">
+        <button class="lightbox-nav lightbox-next" id="lightboxNext">
+            <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Navigation
+        const nav = document.getElementById('nav');
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        // Mobile menu toggle
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Project nav active state
+        const projectNavLinks = document.querySelectorAll('.project-nav a');
+        const sections = document.querySelectorAll('.project-section');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 200;
+                if (window.scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            projectNavLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Lightbox functionality
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const lightboxClose = document.getElementById('lightboxClose');
+        const lightboxPrev = document.getElementById('lightboxPrev');
+        const lightboxNext = document.getElementById('lightboxNext');
+
+        let currentGallery = [];
+        let currentIndex = 0;
+
+        document.querySelectorAll('.gallery-item, .gallery-featured').forEach(item => {
+            item.addEventListener('click', () => {
+                const galleryId = item.dataset.gallery;
+                const allItems = document.querySelectorAll(`[data-gallery="${galleryId}"] img`);
+                currentGallery = Array.from(allItems).map(img => img.src);
+                currentIndex = currentGallery.indexOf(item.querySelector('img').src);
+
+                lightboxImage.src = currentGallery[currentIndex];
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        lightboxClose.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        lightboxPrev.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+            lightboxImage.src = currentGallery[currentIndex];
+        });
+
+        lightboxNext.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % currentGallery.length;
+            lightboxImage.src = currentGallery[currentIndex];
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+
+            if (e.key === 'Escape') {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            } else if (e.key === 'ArrowLeft') {
+                lightboxPrev.click();
+            } else if (e.key === 'ArrowRight') {
+                lightboxNext.click();
+            }
+        });
+
+        // Click outside to close
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
+</body>
+</html>

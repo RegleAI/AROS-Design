@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services | AROS Design</title>
+    <link rel="icon" type="image/png" href="Logos/FAV Icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css?v=2">
+    <style>
+        /* ===== SERVICES PAGE HERO ===== */
+        .services-hero {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: var(--color-primary-dark);
+            padding-top: var(--nav-height);
+        }
+
+        .services-hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: var(--spacing-xl) var(--spacing-md);
+            max-width: 800px;
+        }
+
+        .services-hero h1 {
+            color: var(--color-white);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .services-hero p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.25rem;
+        }
+
+        /* ===== SERVICES INTRO ===== */
+        .services-intro {
+            padding: var(--spacing-xxl) 0;
+            background: var(--color-white);
+        }
+
+        .services-intro-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-xl);
+            align-items: center;
+        }
+
+        .services-intro-content h2 {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .services-intro-content p {
+            color: var(--color-text-light);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .services-intro-image {
+            overflow: hidden;
+        }
+
+        .services-intro-image img {
+            width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 768px) {
+            .services-intro-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== SERVICE DETAIL SECTIONS ===== */
+        .service-detail {
+            padding: var(--spacing-xxl) 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .service-detail:nth-child(even) {
+            background: var(--color-light-bg);
+        }
+
+        .service-detail-grid {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: var(--spacing-xl);
+        }
+
+        .service-detail-header {
+            position: sticky;
+            top: calc(var(--nav-height) + var(--spacing-lg));
+            align-self: start;
+        }
+
+        .service-detail-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: var(--spacing-md);
+            stroke: var(--color-accent);
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        .service-detail-header h2 {
+            font-size: 1.75rem;
+            color: var(--color-primary-dark);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .service-detail-header p {
+            color: var(--color-text-light);
+            font-size: 0.95rem;
+        }
+
+        .service-detail-content h3 {
+            font-size: 1.25rem;
+            color: var(--color-primary-dark);
+            margin-bottom: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+
+        .service-detail-content h3:first-child {
+            margin-top: 0;
+        }
+
+        .service-detail-content p {
+            color: var(--color-text);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .service-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .service-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-sm);
+            font-size: 0.95rem;
+            color: var(--color-text);
+        }
+
+        .service-list li::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--color-accent);
+            border-radius: 50%;
+            margin-top: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 1024px) {
+            .service-detail-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-detail-header {
+                position: relative;
+                top: 0;
+            }
+
+            .service-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== PROCESS SECTION ===== */
+        .process-section {
+            padding: var(--spacing-xxl) 0;
+            background: var(--color-primary-dark);
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-xl);
+        }
+
+        .process-step {
+            text-align: center;
+            padding: var(--spacing-lg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition-smooth);
+        }
+
+        .process-step:hover {
+            border-color: var(--color-accent);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .process-step-number {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            color: var(--color-accent);
+            line-height: 1;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .process-step h3 {
+            color: var(--color-white);
+            font-size: 1.1rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .process-step p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 1024px) {
+            .process-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== DRAWING SHOWCASE ===== */
+        .drawing-showcase {
+            padding: var(--spacing-xl) 0;
+            background: var(--color-light-bg);
+        }
+
+        .drawing-showcase-header {
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .drawing-showcase-image {
+            background: var(--color-white);
+            padding: var(--spacing-md);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .drawing-showcase-image img {
+            width: 100%;
+            height: auto;
+        }
+
+        .drawing-showcase-caption {
+            text-align: center;
+            margin-top: var(--spacing-md);
+            color: var(--color-text-light);
+            font-size: 0.9rem;
+        }
+
+        /* ===== CTA SECTION ===== */
+        .cta-section {
+            padding: var(--spacing-xxl) 0;
+            background: var(--color-white);
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .cta-section p {
+            max-width: 600px;
+            margin: 0 auto var(--spacing-lg);
+            color: var(--color-text-light);
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="nav nav-dark" id="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo-link">
+                <img src="Logos/White The Aros.png" alt="AROS Design" class="nav-logo nav-logo-light">
+                <img src="Logos/AROS Design Logo.svg?v=2" alt="AROS Design" class="nav-logo nav-logo-dark">
+            </a>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="services.html">Services</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="contact.html" class="nav-cta">Get a Quote</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="services-hero">
+        <div class="services-hero-content fade-in">
+            <span class="label" style="color: var(--color-accent); margin-bottom: var(--spacing-md); display: block;">What We Do</span>
+            <h1>Our Services</h1>
+            <p>Design, engineering and environmental expertise for projects that demand precision.</p>
+        </div>
+    </section>
+
+    <!-- SERVICES INTRO -->
+    <section class="services-intro">
+        <div class="container">
+            <div class="services-intro-grid">
+                <div class="services-intro-content fade-in">
+                    <h2>Turnkey Consultancy</h2>
+                    <p>Complex projects require technical depth. Our team brings expertise across planning, structural engineering, ecology and design, with the experience to navigate challenging sites and demanding briefs.</p>
+                    <p>We work on projects where quality matters, where building regulations are complex and where clients expect rigorous professional standards throughout.</p>
+                </div>
+                <div class="services-intro-image fade-in">
+                    <img src="Photos_Optimized/Landscape.png" alt="AROS Design Services">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICE 1: PLANNING -->
+    <section class="service-detail" id="planning">
+        <div class="container">
+            <div class="service-detail-grid">
+                <div class="service-detail-header fade-in">
+                    <svg class="service-detail-icon" viewBox="0 0 60 60">
+                        <rect x="10" y="8" width="40" height="44" rx="2"/>
+                        <line x1="18" y1="18" x2="42" y2="18"/>
+                        <line x1="18" y1="28" x2="42" y2="28"/>
+                        <line x1="18" y1="38" x2="34" y2="38"/>
+                        <path d="M40 44L45 49L55 39"/>
+                    </svg>
+                    <h2>Planning & Consents</h2>
+                    <p>Navigating the planning system with precision and expertise.</p>
+                </div>
+                <div class="service-detail-content fade-in">
+                    <h3>Planning Applications</h3>
+                    <p>We prepare and submit comprehensive planning applications, managing the entire process from pre-application discussions through to approval. Our team understands local planning policies across the UK, ensuring applications are positioned for success.</p>
+
+                    <h3>What We Deliver</h3>
+                    <ul class="service-list">
+                        <li>Full planning applications</li>
+                        <li>Outline planning applications</li>
+                        <li>Prior approval notifications</li>
+                        <li>Listed building consent</li>
+                        <li>Conservation area applications</li>
+                        <li>Discharge of conditions</li>
+                        <li>Certificate of lawfulness</li>
+                        <li>Planning appeals support</li>
+                    </ul>
+
+                    <h3>Conditions Discharge</h3>
+                    <p>Planning conditions can delay projects if not managed properly. We coordinate the discharge of all conditions, ensuring technical submissions meet requirements and approvals are secured efficiently.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICE 2: STRUCTURAL -->
+    <section class="service-detail" id="structural">
+        <div class="container">
+            <div class="service-detail-grid">
+                <div class="service-detail-header fade-in">
+                    <svg class="service-detail-icon" viewBox="0 0 60 60">
+                        <rect x="8" y="32" width="16" height="22"/>
+                        <rect x="22" y="20" width="16" height="34"/>
+                        <rect x="36" y="8" width="16" height="46"/>
+                        <line x1="4" y1="54" x2="56" y2="54"/>
+                    </svg>
+                    <h2>Structural & Technical Engineering</h2>
+                    <p>Engineering solutions that underpin exceptional design.</p>
+                </div>
+                <div class="service-detail-content fade-in">
+                    <h3>Structural Engineering</h3>
+                    <p>Our structural engineering services provide the technical foundation for your project. From initial assessments through to detailed design, we deliver solutions that are both technically sound and cost-effective.</p>
+
+                    <h3>What We Deliver</h3>
+                    <ul class="service-list">
+                        <li>Structural surveys and reports</li>
+                        <li>Structural calculations</li>
+                        <li>Foundation design</li>
+                        <li>Steel frame design</li>
+                        <li>Timber frame solutions</li>
+                        <li>Basement engineering</li>
+                        <li>Temporary works design</li>
+                        <li>Party wall matters</li>
+                    </ul>
+
+                    <h3>Technical Drawings</h3>
+                    <p>We produce detailed technical drawings and specifications that enable accurate pricing and precise construction. Our documentation meets Building Regulations requirements and supports smooth project delivery.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICE 3: DESIGN -->
+    <section class="service-detail" id="design">
+        <div class="container">
+            <div class="service-detail-grid">
+                <div class="service-detail-header fade-in">
+                    <svg class="service-detail-icon" viewBox="0 0 60 60">
+                        <path d="M30 6L6 24V54H54V24L30 6Z"/>
+                        <rect x="22" y="36" width="16" height="18"/>
+                        <rect x="12" y="28" width="10" height="10"/>
+                        <rect x="38" y="28" width="10" height="10"/>
+                    </svg>
+                    <h2>Design & Architecture</h2>
+                    <p>Creating spaces that inspire and endure.</p>
+                </div>
+                <div class="service-detail-content fade-in">
+                    <h3>Interior Design</h3>
+                    <p>Our interior design services transform spaces into exceptional environments. We work across high-specification residential and commercial projects, delivering designs that balance aesthetics with functionality.</p>
+
+                    <h3>What We Deliver</h3>
+                    <ul class="service-list">
+                        <li>Concept design development</li>
+                        <li>Space planning</li>
+                        <li>Material and finish selection</li>
+                        <li>Bespoke joinery design</li>
+                        <li>Kitchen and bathroom design</li>
+                        <li>Lighting design</li>
+                        <li>Furniture specification</li>
+                        <li>FF&E scheduling</li>
+                    </ul>
+
+                    <h3>Landscape Design</h3>
+                    <p>We design exterior spaces that complement and enhance architectural design. Our landscape services range from courtyard gardens to large estate planning, always considering ecological impact and long-term maintenance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICE 4: ECOLOGY -->
+    <section class="service-detail" id="ecology">
+        <div class="container">
+            <div class="service-detail-grid">
+                <div class="service-detail-header fade-in">
+                    <svg class="service-detail-icon" viewBox="0 0 60 60">
+                        <path d="M30 54C30 54 10 38 10 24C10 14 18 6 28 6C32 6 30 14 30 14C30 14 28 6 32 6C42 6 50 14 50 24C50 38 30 54 30 54Z"/>
+                        <line x1="30" y1="22" x2="30" y2="42"/>
+                        <line x1="22" y1="30" x2="30" y2="38"/>
+                        <line x1="38" y1="30" x2="30" y2="38"/>
+                    </svg>
+                    <h2>Ecology & Environment</h2>
+                    <p>Balancing development with environmental responsibility.</p>
+                </div>
+                <div class="service-detail-content fade-in">
+                    <h3>Ecological Services</h3>
+                    <p>Our ecological team ensures your project meets all environmental requirements. We provide comprehensive assessments and deliver enhancement strategies that satisfy planning conditions while contributing positively to local biodiversity.</p>
+
+                    <h3>What We Deliver</h3>
+                    <ul class="service-list">
+                        <li>Preliminary ecological appraisals</li>
+                        <li>Protected species surveys</li>
+                        <li>Bat surveys and mitigation</li>
+                        <li>Biodiversity net gain assessments</li>
+                        <li>Arboricultural reports</li>
+                        <li>Tree protection plans</li>
+                        <li>Wildlife lighting strategies</li>
+                        <li>Ecological enhancement schemes</li>
+                    </ul>
+
+                    <h3>Regulatory Expertise</h3>
+                    <p>We specialise in complex regulatory requirements including SAB (Sustainable Drainage) applications and Construction Environmental Management Plans (CEMP). Our team understands the specific requirements of environmental agencies and local planning authorities across the UK.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICE 5: PROJECT MANAGEMENT -->
+    <section class="service-detail" id="management">
+        <div class="container">
+            <div class="service-detail-grid">
+                <div class="service-detail-header fade-in">
+                    <svg class="service-detail-icon" viewBox="0 0 60 60">
+                        <circle cx="30" cy="30" r="22"/>
+                        <circle cx="30" cy="30" r="8"/>
+                        <line x1="30" y1="8" x2="30" y2="16"/>
+                        <line x1="30" y1="44" x2="30" y2="52"/>
+                        <line x1="8" y1="30" x2="16" y2="30"/>
+                        <line x1="44" y1="30" x2="52" y2="30"/>
+                    </svg>
+                    <h2>Project Management & Coordination</h2>
+                    <p>One point of contact from brief to completion.</p>
+                </div>
+                <div class="service-detail-content fade-in">
+                    <h3>Complete Oversight</h3>
+                    <p>Our project management service keeps complex projects on track. We manage programmes, monitor quality and maintain clear communication at every stage, so nothing falls through the gaps.</p>
+
+                    <h3>What We Deliver</h3>
+                    <ul class="service-list">
+                        <li>Project feasibility assessment</li>
+                        <li>Programme management</li>
+                        <li>Integrated delivery</li>
+                        <li>Budget monitoring</li>
+                        <li>Quality assurance</li>
+                        <li>Risk management</li>
+                        <li>Stakeholder communication</li>
+                        <li>Completion and handover</li>
+                    </ul>
+
+                    <h3>The AROS Approach</h3>
+                    <p>We take ownership. From the first site visit to final sign-off, our team is accountable for delivery. Problems are solved proactively, deadlines are met and quality is never compromised.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROCESS SECTION -->
+    <section class="process-section">
+        <div class="container">
+            <div class="section-header text-center fade-in">
+                <span class="section-label">Our Process</span>
+                <h2 class="section-title-light">How We Work</h2>
+            </div>
+            <div class="process-grid">
+                <div class="process-step fade-in">
+                    <div class="process-step-number">01</div>
+                    <h3>Brief & Feasibility</h3>
+                    <p>We begin by understanding your vision and assessing project viability, identifying opportunities and constraints.</p>
+                </div>
+                <div class="process-step fade-in">
+                    <div class="process-step-number">02</div>
+                    <h3>Survey & Assessment</h3>
+                    <p>Comprehensive site analysis and technical evaluation, establishing the foundation for design development.</p>
+                </div>
+                <div class="process-step fade-in">
+                    <div class="process-step-number">03</div>
+                    <h3>Proactive Delivery</h3>
+                    <p>We identify challenges early and resolve them before they impact your programme.</p>
+                </div>
+                <div class="process-step fade-in">
+                    <div class="process-step-number">04</div>
+                    <h3>Delivery & Sign-Off</h3>
+                    <p>Compliance, completion and handover. Ensuring your project is delivered to the highest standards.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="cta-section">
+        <div class="container fade-in">
+            <h2>Ready to Start Your Project?</h2>
+            <p>Get in touch to discuss how our integrated approach can deliver your project from concept to completion.</p>
+            <a href="contact.html" class="btn btn-primary btn-large">Get in Touch</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-main">
+                <div class="footer-logo-wrapper">
+                    <img src="Logos/White The Aros.png" alt="AROS Design" class="footer-logo">
+                </div>
+                <nav class="footer-nav">
+                    <a href="services.html">Services</a>
+                    <a href="projects.html">Projects</a>
+                    <a href="about.html">About</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
+                <div class="footer-tagline">
+                    Turnkey Design & Technical Consultancy<br>United Kingdom
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; AROS Design 2025. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Terms</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Navigation
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Intersection Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

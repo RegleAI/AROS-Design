@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AROS Design | Turnkey Design & Technical Consultancy</title>
+    <link rel="icon" type="image/png" href="Logos/FAV Icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css?v=2">
+    <style>
+        /* ===== HERO VIDEO SECTION ===== */
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            object-fit: cover;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(10, 22, 40, 0.5) 0%,
+                rgba(10, 22, 40, 0.7) 50%,
+                rgba(10, 22, 40, 0.85) 100%
+            );
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 1000px;
+            padding: var(--spacing-md);
+        }
+
+        .hero-label {
+            display: inline-block;
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            margin-bottom: var(--spacing-md);
+            font-weight: 500;
+        }
+
+        .hero h1 {
+            color: var(--color-white);
+            margin-bottom: var(--spacing-lg);
+            font-weight: 300;
+            line-height: 1.1;
+        }
+
+        .hero h1 span {
+            display: block;
+        }
+
+        .hero h1 .accent {
+            color: var(--color-accent);
+            font-style: italic;
+        }
+
+        .hero-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto var(--spacing-xl);
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ===== INTRO STATEMENT ===== */
+        .intro-statement {
+            padding: var(--spacing-xxxl) 0;
+            background: var(--color-white);
+        }
+
+        .intro-statement-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .intro-statement h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--color-primary-dark);
+            line-height: 1.4;
+            font-weight: 300;
+        }
+
+        .intro-statement h2 em {
+            font-style: italic;
+            color: var(--color-primary-mid);
+        }
+
+        /* ===== IMAGE SHOWCASE ===== */
+        .image-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 80vh;
+        }
+
+        .showcase-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .showcase-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.5s ease;
+        }
+
+        .showcase-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .showcase-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--spacing-xl);
+            background: var(--color-light-bg);
+        }
+
+        .showcase-content-inner {
+            max-width: 500px;
+        }
+
+        .showcase-content .label {
+            color: var(--color-accent);
+            margin-bottom: var(--spacing-md);
+            display: block;
+        }
+
+        .showcase-content h3 {
+            color: var(--color-primary-dark);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .showcase-content p {
+            color: var(--color-text-light);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        @media (max-width: 768px) {
+            .image-showcase {
+                grid-template-columns: 1fr;
+            }
+
+            .showcase-image {
+                min-height: 50vh;
+            }
+        }
+
+        /* ===== SERVICES PREVIEW ===== */
+        .services-preview {
+            padding: var(--spacing-xl) 0;
+            background: var(--color-primary-dark);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            margin-top: var(--spacing-xl);
+        }
+
+        .service-item {
+            background: var(--color-primary-dark);
+            padding: var(--spacing-xl) var(--spacing-md);
+            text-align: center;
+            transition: var(--transition-smooth);
+        }
+
+        .service-item:hover {
+            background: var(--color-primary-mid);
+        }
+
+        .service-item .icon {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto var(--spacing-md);
+            stroke: var(--color-accent);
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        .service-item h4 {
+            color: var(--color-white);
+            font-size: 1.1rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .service-item p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== FULL WIDTH IMAGE BAND ===== */
+        .image-band {
+            height: 60vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-band img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-band-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, rgba(10, 22, 40, 0.7), transparent);
+            display: flex;
+            align-items: center;
+            padding: var(--spacing-xl);
+        }
+
+        .image-band-content {
+            max-width: 500px;
+            color: var(--color-white);
+        }
+
+        .image-band-content h2 {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .image-band-content p {
+            opacity: 0.9;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        /* ===== DRAWING SHOWCASE ===== */
+        .drawing-showcase {
+            padding: var(--spacing-lg) 0;
+            background: var(--color-white);
+        }
+
+        .drawing-showcase-image {
+            background: transparent;
+        }
+
+        .drawing-showcase-image img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* ===== PROJECTS PREVIEW ===== */
+        .projects-preview {
+            padding: var(--spacing-xl) 0;
+            background: var(--color-light-bg);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-xl);
+        }
+
+        .project-card {
+            position: relative;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s ease;
+        }
+
+        .project-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10, 22, 40, 0.9) 0%, transparent 60%);
+            z-index: 1;
+            transition: var(--transition-smooth);
+        }
+
+        .project-card:hover::before {
+            background: linear-gradient(to top, rgba(10, 22, 40, 0.95) 0%, rgba(10, 22, 40, 0.3) 100%);
+        }
+
+        .project-card-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: var(--spacing-lg);
+            z-index: 2;
+            transform: translateY(20px);
+            transition: var(--transition-smooth);
+        }
+
+        .project-card:hover .project-card-content {
+            transform: translateY(0);
+        }
+
+        .project-tag {
+            display: inline-block;
+            background: var(--color-accent);
+            color: var(--color-primary-dark);
+            padding: 0.35rem 0.85rem;
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .project-card h3 {
+            color: var(--color-white);
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .project-location {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.85rem;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            color: var(--color-accent);
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-top: var(--spacing-md);
+            opacity: 0;
+            transform: translateY(10px);
+            transition: var(--transition-smooth);
+        }
+
+        .project-card:hover .project-link {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-card {
+                aspect-ratio: 4/3;
+            }
+        }
+
+        /* ===== QUOTE SECTION ===== */
+        .quote-section {
+            padding: var(--spacing-xxxl) 0;
+            background: var(--color-primary-dark);
+            text-align: center;
+        }
+
+        .quote-section blockquote {
+            max-width: 900px;
+            margin: 0 auto;
+            font-family: var(--font-heading);
+            font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+            font-style: italic;
+            color: var(--color-white);
+            line-height: 1.5;
+        }
+
+        .quote-section cite {
+            display: block;
+            margin-top: var(--spacing-lg);
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            font-style: normal;
+        }
+
+        /* ===== CTA SECTION ===== */
+        .cta-section {
+            padding: var(--spacing-xxl) 0;
+            background: var(--color-white);
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .cta-section p {
+            max-width: 600px;
+            margin: 0 auto var(--spacing-lg);
+            color: var(--color-text-light);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="nav nav-hero" id="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo-link">
+                <img src="Logos/White The Aros.png" alt="AROS Design" class="nav-logo nav-logo-light">
+                <img src="Logos/AROS Design Logo.svg?v=2" alt="AROS Design" class="nav-logo nav-logo-dark">
+            </a>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="services.html">Services</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="contact.html" class="nav-cta">Get a Quote</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO WITH VIDEO -->
+    <section class="hero">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="Photos_Optimized/Video/6 Russell Gardens Mews, W14 - Reel.m4v" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="hero-label fade-in">Turnkey Design Consultancy</span>
+            <h1 class="fade-in stagger-1">
+                <span>One Consultancy.</span>
+                <span>Every <em class="accent">Discipline.</em></span>
+                <span>Complete Delivery.</span>
+            </h1>
+            <p class="hero-subtitle fade-in stagger-2">From planning applications to structural engineering, we handle every technical discipline so you can focus on the vision.</p>
+            <div class="hero-ctas fade-in stagger-3">
+                <a href="contact.html" class="btn btn-primary btn-large">Start Your Project</a>
+                <a href="projects.html" class="btn btn-outline btn-large">View Our Work</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <svg viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+        </div>
+    </section>
+
+    <!-- INTRO STATEMENT -->
+    <section class="intro-statement">
+        <div class="container">
+            <div class="intro-statement-inner fade-in">
+                <h2>We specialise in <em>high-specification residential and commercial projects</em> where precision, quality and regulatory expertise are essential.</h2>
+                <div class="line-accent"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- IMAGE SHOWCASE - LEFT -->
+    <section class="image-showcase">
+        <div class="showcase-image scale-in">
+            <img src="Photos_Optimized/RGM/FH_LurotBrand_6RussellGardensMews_TypRes-1.jpg" alt="Holland Park">
+        </div>
+        <div class="showcase-content">
+            <div class="showcase-content-inner slide-in-right">
+                <span class="label">Our Approach</span>
+                <h3>Precision at Every Stage</h3>
+                <p>We understand that complex projects require meticulous attention to detail. Our team manages the technical challenges so nothing is overlooked, from planning conditions to building regulations.</p>
+                <a href="about.html" class="btn btn-outline-dark">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- IMAGE SHOWCASE - RIGHT -->
+    <section class="image-showcase">
+        <div class="showcase-content">
+            <div class="showcase-content-inner slide-in-left">
+                <span class="label">Quality Focused</span>
+                <h3>Built to Last</h3>
+                <p>Every project benefits from rigorous engineering standards, thorough ecological assessments and designs that meet the highest specifications. We never cut corners.</p>
+                <a href="services.html" class="btn btn-outline-dark">Our Services</a>
+            </div>
+        </div>
+        <div class="showcase-image scale-in">
+            <img src="Photos_Optimized/59 Pembridge/889A3204_HDR-2.jpg" alt="Notting Hill">
+        </div>
+    </section>
+
+    <!-- SERVICES PREVIEW -->
+    <section class="services-preview">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-label">What We Do</span>
+                <h2 class="section-title-light">Comprehensive Design & Technical Services</h2>
+            </div>
+        </div>
+        <div class="services-grid">
+            <div class="service-item fade-in stagger-1">
+                <svg class="icon" viewBox="0 0 50 50">
+                    <rect x="8" y="6" width="34" height="38" rx="2"/>
+                    <line x1="14" y1="14" x2="36" y2="14"/>
+                    <line x1="14" y1="22" x2="36" y2="22"/>
+                    <line x1="14" y1="30" x2="28" y2="30"/>
+                    <path d="M34 36L38 40L46 32"/>
+                </svg>
+                <h4>Planning & Consents</h4>
+                <p>Applications, conditions discharge and regulatory approvals</p>
+            </div>
+            <div class="service-item fade-in stagger-2">
+                <svg class="icon" viewBox="0 0 50 50">
+                    <rect x="6" y="28" width="14" height="18"/>
+                    <rect x="18" y="18" width="14" height="28"/>
+                    <rect x="30" y="8" width="14" height="38"/>
+                    <line x1="4" y1="46" x2="46" y2="46"/>
+                </svg>
+                <h4>Structural Engineering</h4>
+                <p>Calculations, technical drawings and engineering solutions</p>
+            </div>
+            <div class="service-item fade-in stagger-3">
+                <svg class="icon" viewBox="0 0 50 50">
+                    <path d="M25 4L4 20V46H46V20L25 4Z"/>
+                    <rect x="18" y="30" width="14" height="16"/>
+                    <rect x="10" y="22" width="8" height="8"/>
+                    <rect x="32" y="22" width="8" height="8"/>
+                </svg>
+                <h4>Design & Architecture</h4>
+                <p>Interior design and landscape across residential and commercial</p>
+            </div>
+            <div class="service-item fade-in stagger-4">
+                <svg class="icon" viewBox="0 0 50 50">
+                    <path d="M25 46C25 46 8 32 8 20C8 12 14 6 22 6C25 6 25 12 25 12C25 12 25 6 28 6C36 6 42 12 42 20C42 32 25 46 25 46Z"/>
+                    <line x1="25" y1="18" x2="25" y2="34"/>
+                    <line x1="18" y1="24" x2="25" y2="30"/>
+                    <line x1="32" y1="24" x2="25" y2="30"/>
+                </svg>
+                <h4>Ecology & Environment</h4>
+                <p>Ecological reports, arboricultural assessments, SAB applications</p>
+            </div>
+            <div class="service-item fade-in stagger-5">
+                <svg class="icon" viewBox="0 0 50 50">
+                    <circle cx="25" cy="25" r="18"/>
+                    <circle cx="25" cy="25" r="6"/>
+                    <line x1="25" y1="7" x2="25" y2="13"/>
+                    <line x1="25" y1="37" x2="25" y2="43"/>
+                    <line x1="7" y1="25" x2="13" y2="25"/>
+                    <line x1="37" y1="25" x2="43" y2="25"/>
+                </svg>
+                <h4>Project Management</h4>
+                <p>Single point of contact from brief to sign-off</p>
+            </div>
+        </div>
+        <div class="container" style="text-align: center; margin-top: var(--spacing-xl);">
+            <a href="services.html" class="btn btn-primary fade-in">View All Services</a>
+        </div>
+    </section>
+
+    <!-- FULL WIDTH IMAGE BAND -->
+    <section class="image-band">
+        <img src="Photos_Optimized/George Bank/IMG_6609..JPG" alt="The Gower Project">
+        <div class="image-band-overlay">
+            <div class="image-band-content container fade-in">
+                <span class="label" style="color: var(--color-accent); display: block; margin-bottom: var(--spacing-sm);">UK Coverage</span>
+                <h2>Delivering Across the UK</h2>
+                <p>From coastal retreats to city centres, we provide comprehensive design and technical consultancy services wherever your project is located.</p>
+                <a href="contact.html" class="btn btn-outline">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECHNICAL DRAWING SHOWCASE -->
+    <section class="drawing-showcase">
+        <div class="container">
+            <div class="drawing-showcase-image fade-in">
+                <img src="Drawings/proposed-elevations.png" alt="Proposed Elevations - Technical Drawing">
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS PREVIEW -->
+    <section class="projects-preview">
+        <div class="container">
+            <div class="section-header fade-in">
+                <span class="section-label">Featured Work</span>
+                <h2 class="section-title">Recent Projects</h2>
+                <p class="section-subtitle">High-specification residential and commercial developments across the UK.</p>
+            </div>
+            <div class="projects-grid">
+                <a href="projects.html#pembridge" class="project-card fade-in stagger-1">
+                    <img src="Photos_Optimized/59 Pembridge/889A3066_HDR-2.jpg" alt="Notting Hill">
+                    <div class="project-card-content">
+                        <span class="project-tag">Renovation</span>
+                        <h3>Notting Hill</h3>
+                        <p class="project-location">Notting Hill, London</p>
+                        <span class="project-link">View Project <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></span>
+                    </div>
+                </a>
+                <a href="projects.html#rgm" class="project-card fade-in stagger-2">
+                    <img src="Photos_Optimized/RGM/FH_LurotBrand_6RussellGardensMews_TypRes-3.jpg" alt="Holland Park">
+                    <div class="project-card-content">
+                        <span class="project-tag">New Build</span>
+                        <h3>Holland Park</h3>
+                        <p class="project-location">Holland Park, London</p>
+                        <span class="project-link">View Project <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></span>
+                    </div>
+                </a>
+                <a href="projects.html#george-bank" class="project-card fade-in stagger-3">
+                    <img src="Photos_Optimized/George Bank/IMG_6639..JPG" alt="The Gower">
+                    <div class="project-card-content">
+                        <span class="project-tag">Conversion</span>
+                        <h3>The Gower</h3>
+                        <p class="project-location">Gower, Wales</p>
+                        <span class="project-link">View Project <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg></span>
+                    </div>
+                </a>
+            </div>
+            <div style="text-align: center; margin-top: var(--spacing-xl);">
+                <a href="projects.html" class="btn btn-outline-dark fade-in">View All Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- QUOTE SECTION -->
+    <section class="quote-section">
+        <div class="container fade-in">
+            <blockquote>
+                "AROS Design transformed what could have been a complex project into a seamless experience. One point of contact for everything, exactly what we needed."
+            </blockquote>
+            <cite>Private Client, Pembrokeshire</cite>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="cta-section">
+        <div class="container fade-in">
+            <h2>Ready to Start Your Project?</h2>
+            <p>Whether you're planning a renovation, new build or commercial development, we'd love to hear about your project.</p>
+            <div class="cta-buttons">
+                <a href="contact.html" class="btn btn-primary">Start a Conversation</a>
+                <a href="services.html" class="btn btn-outline-dark">Explore Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-main">
+                <div class="footer-logo-wrapper">
+                    <img src="Logos/White The Aros.png" alt="AROS Design" class="footer-logo">
+                </div>
+                <nav class="footer-nav">
+                    <a href="services.html">Services</a>
+                    <a href="projects.html">Projects</a>
+                    <a href="about.html">About</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
+                <div class="footer-tagline">
+                    Turnkey Design & Technical Consultancy<br>United Kingdom
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; AROS Design 2025. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Terms</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Navigation scroll effect
+        const nav = document.getElementById('nav');
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

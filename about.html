@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | AROS Design</title>
+    <link rel="icon" type="image/png" href="Logos/FAV Icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css?v=2">
+    <style>
+        /* ===== ABOUT HERO ===== */
+        .about-hero {
+            height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: var(--color-primary-dark);
+        }
+
+        .about-hero-content {
+            display: flex;
+            align-items: center;
+            padding: calc(var(--nav-height) + var(--spacing-xl)) var(--spacing-md) var(--spacing-xl) var(--spacing-xl);
+        }
+
+        .about-hero-content-inner {
+            max-width: 550px;
+            margin-left: 0;
+            padding-left: var(--spacing-lg);
+            text-align: left;
+        }
+
+        @media (max-width: 1440px) {
+            .about-hero-content {
+                padding-left: var(--spacing-lg);
+            }
+        }
+
+        .about-hero h1 {
+            color: var(--color-white);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .about-hero p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.15rem;
+            line-height: 1.8;
+        }
+
+        .about-hero-image {
+            position: relative;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .about-hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        @media (max-width: 1024px) {
+            .about-hero {
+                grid-template-columns: 1fr;
+                min-height: auto;
+            }
+
+            .about-hero-content {
+                padding: calc(var(--nav-height) + var(--spacing-lg)) var(--spacing-md) var(--spacing-lg);
+            }
+
+            .about-hero-content-inner {
+                margin: 0 auto;
+                text-align: center;
+            }
+
+            .about-hero-image {
+                min-height: 50vh;
+            }
+        }
+
+        /* ===== PHILOSOPHY SECTION ===== */
+        .philosophy {
+            padding: var(--spacing-xl) 0;
+            background: var(--color-white);
+        }
+
+        .philosophy-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .philosophy blockquote {
+            font-family: var(--font-heading);
+            font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+            font-style: italic;
+            color: var(--color-primary-dark);
+            line-height: 1.5;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .philosophy p {
+            color: var(--color-text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* ===== VALUES SECTION ===== */
+        .values {
+            padding: var(--spacing-lg) 0;
+            background: var(--color-light-bg);
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+
+        .value-item {
+            text-align: center;
+            padding: var(--spacing-md);
+        }
+
+        .value-number {
+            font-family: var(--font-heading);
+            font-size: 4rem;
+            color: var(--color-accent);
+            line-height: 1;
+            margin-bottom: var(--spacing-md);
+            opacity: 0.5;
+        }
+
+        .value-item h3 {
+            font-size: 1.5rem;
+            color: var(--color-primary-dark);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .value-item p {
+            color: var(--color-text-light);
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== IMAGE BAND ===== */
+        .about-image-band {
+            width: 100%;
+            position: relative;
+            background: var(--color-light-bg);
+            padding: var(--spacing-lg) 0;
+        }
+
+        .about-image-band img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* ===== APPROACH SECTION ===== */
+        .approach {
+            padding: var(--spacing-xxxl) 0;
+            background: var(--color-light-bg);
+        }
+
+        .approach-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-xxl);
+            align-items: center;
+        }
+
+        .approach-content h2 {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .approach-content p {
+            color: var(--color-text-light);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .approach-list {
+            margin-top: var(--spacing-lg);
+        }
+
+        .approach-list-item {
+            display: flex;
+            gap: var(--spacing-md);
+            padding: var(--spacing-md) 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .approach-list-item:last-child {
+            border-bottom: none;
+        }
+
+        .approach-list-number {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--color-accent);
+            font-weight: 500;
+        }
+
+        .approach-list-content h4 {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--color-primary-dark);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .approach-list-content p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .approach-image {
+            aspect-ratio: 4/5;
+            overflow: hidden;
+        }
+
+        .approach-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media (max-width: 1024px) {
+            .approach-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .approach-image {
+                aspect-ratio: 16/9;
+            }
+        }
+
+        /* ===== COVERAGE SECTION ===== */
+        .coverage {
+            padding: var(--spacing-xxl) 0;
+            background: var(--color-primary-dark);
+        }
+
+        .coverage-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-xl);
+            align-items: center;
+        }
+
+        .coverage-content h2 {
+            color: var(--color-white);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .coverage-content p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .coverage-regions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-md);
+        }
+
+        .coverage-region {
+            padding: var(--spacing-md);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            text-align: center;
+        }
+
+        .coverage-region h4 {
+            color: var(--color-accent);
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .coverage-region p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.85rem;
+            margin: 0;
+        }
+
+        .coverage-image {
+            aspect-ratio: 1;
+            overflow: hidden;
+        }
+
+        .coverage-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media (max-width: 768px) {
+            .coverage-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== TRADE SECTION ===== */
+        .trade-section {
+            padding: var(--spacing-xxl) 0;
+            background: var(--color-light-bg);
+        }
+
+        .trade-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-xl);
+            align-items: center;
+        }
+
+        .trade-content h2 {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .trade-content p {
+            color: var(--color-text-light);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .trade-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+
+        .trade-feature {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .trade-feature-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--color-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .trade-feature-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--color-primary-dark);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .trade-feature span {
+            font-size: 0.9rem;
+            color: var(--color-text);
+        }
+
+        @media (max-width: 768px) {
+            .trade-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .trade-features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== CTA SECTION ===== */
+        .cta-section {
+            padding: var(--spacing-xxl) 0;
+            background: var(--color-white);
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .cta-section p {
+            max-width: 600px;
+            margin: 0 auto var(--spacing-lg);
+            color: var(--color-text-light);
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="nav nav-dark" id="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo-link">
+                <img src="Logos/White The Aros.png" alt="AROS Design" class="nav-logo nav-logo-light">
+                <img src="Logos/AROS Design Logo.svg?v=2" alt="AROS Design" class="nav-logo nav-logo-dark">
+            </a>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="services.html">Services</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="contact.html" class="nav-cta">Get a Quote</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="about-hero">
+        <div class="about-hero-content">
+            <div class="about-hero-content-inner fade-in">
+                <span class="label" style="color: var(--color-accent); margin-bottom: var(--spacing-md); display: block;">About AROS Design</span>
+                <h1>One Consultancy. Complete Delivery.</h1>
+                <p>AROS Design is a turnkey consultancy specialising in high-specification residential and commercial projects. We handle the complexity so you can focus on the outcome.</p>
+            </div>
+        </div>
+        <div class="about-hero-image">
+            <img src="Photos_Optimized/RGM/FH_LurotBrand_6RussellGardensMews_TypRes-24.jpg" alt="AROS Design">
+        </div>
+    </section>
+
+    <!-- PHILOSOPHY -->
+    <section class="philosophy">
+        <div class="container">
+            <div class="philosophy-content fade-in">
+                <blockquote>"Design. Engineering. Environment. All under one roof."</blockquote>
+                <div class="line-accent"></div>
+                <p>Complex projects demand technical precision and creative problem-solving. We bring both, ensuring every planning condition, structural calculation and environmental requirement is addressed with expertise.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- VALUES -->
+    <section class="values">
+        <div class="container">
+            <div class="section-header text-center fade-in">
+                <span class="section-label">Our Values</span>
+                <h2 class="section-title">What Guides Us</h2>
+            </div>
+            <div class="values-grid">
+                <div class="value-item fade-in">
+                    <div class="value-number">01</div>
+                    <h3>Precision</h3>
+                    <p>Every detail matters. From structural calculations to planning submissions, we apply rigorous standards that protect your investment.</p>
+                </div>
+                <div class="value-item fade-in">
+                    <div class="value-number">02</div>
+                    <h3>Expertise</h3>
+                    <p>Our team brings deep technical knowledge across planning, engineering, ecology and design. Complex challenges are our speciality.</p>
+                </div>
+                <div class="value-item fade-in">
+                    <div class="value-number">03</div>
+                    <h3>Accountability</h3>
+                    <p>One team, one responsibility. We own every aspect of delivery and stand behind our work from start to finish.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- IMAGE BAND -->
+    <div class="about-image-band">
+        <img src="Photos_Optimized/interior-watercolor.png" alt="Interior Design">
+    </div>
+
+    <!-- APPROACH -->
+    <section class="approach">
+        <div class="container">
+            <div class="approach-grid">
+                <div class="approach-content fade-in">
+                    <span class="label" style="color: var(--color-accent); margin-bottom: var(--spacing-sm); display: block;">Our Approach</span>
+                    <h2>The Turnkey Advantage</h2>
+                    <p>Complex projects often stall when specialists work in isolation. Our approach is different. We see the whole picture, anticipate issues before they arise and solve problems proactively.</p>
+
+                    <div class="approach-list">
+                        <div class="approach-list-item">
+                            <span class="approach-list-number">01</span>
+                            <div class="approach-list-content">
+                                <h4>Technical Depth</h4>
+                                <p>Structural engineering, planning expertise and ecological knowledge in one team.</p>
+                            </div>
+                        </div>
+                        <div class="approach-list-item">
+                            <span class="approach-list-number">02</span>
+                            <div class="approach-list-content">
+                                <h4>Proactive Solutions</h4>
+                                <p>We identify challenges early and resolve them before they become problems.</p>
+                            </div>
+                        </div>
+                        <div class="approach-list-item">
+                            <span class="approach-list-number">03</span>
+                            <div class="approach-list-content">
+                                <h4>Regulatory Expertise</h4>
+                                <p>Planning authorities, building control and environmental compliance handled with confidence.</p>
+                            </div>
+                        </div>
+                        <div class="approach-list-item">
+                            <span class="approach-list-number">04</span>
+                            <div class="approach-list-content">
+                                <h4>Quality Assurance</h4>
+                                <p>Rigorous standards applied to every drawing, calculation and submission.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="approach-image fade-in">
+                    <img src="Photos_Optimized/RGM/FH_LurotBrand_6RussellGardensMews_TypRes-28.jpg" alt="AROS Approach">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COVERAGE -->
+    <section class="coverage">
+        <div class="container">
+            <div class="coverage-grid">
+                <div class="coverage-image fade-in">
+                    <img src="Photos_Optimized/RGM-watercolor.png" alt="UK Coverage">
+                </div>
+                <div class="coverage-content fade-in">
+                    <span class="label" style="color: var(--color-accent); margin-bottom: var(--spacing-sm); display: block;">Coverage</span>
+                    <h2>United Kingdom</h2>
+                    <p>From coastal retreats to city centres, we deliver comprehensive consultancy services wherever your project is located. Our team understands the specific requirements of planning authorities and regulatory bodies across the UK.</p>
+                    <div class="coverage-regions">
+                        <div class="coverage-region">
+                            <h4>Nationwide</h4>
+                            <p>Full UK Coverage</p>
+                        </div>
+                        <div class="coverage-region">
+                            <h4>All Sectors</h4>
+                            <p>Residential & Commercial</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRADE SECTION -->
+    <section class="trade-section">
+        <div class="container">
+            <div class="trade-grid">
+                <div class="trade-content fade-in">
+                    <span class="label" style="color: var(--color-accent); margin-bottom: var(--spacing-sm); display: block;">Trade Partners</span>
+                    <h2>Working With the Best</h2>
+                    <p>We build lasting partnerships with architects, developers and private clients who value technical excellence and reliable delivery.</p>
+                    <p>We build lasting partnerships with trade professionals who share our commitment to quality and precision.</p>
+
+                    <div class="trade-features">
+                        <div class="trade-feature">
+                            <div class="trade-feature-icon">
+                                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/></svg>
+                            </div>
+                            <span>High-Specification Projects</span>
+                        </div>
+                        <div class="trade-feature">
+                            <div class="trade-feature-icon">
+                                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                            </div>
+                            <span>Long-Term Relationships</span>
+                        </div>
+                        <div class="trade-feature">
+                            <div class="trade-feature-icon">
+                                <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                            </div>
+                            <span>Streamlined Procurement</span>
+                        </div>
+                        <div class="trade-feature">
+                            <div class="trade-feature-icon">
+                                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+                            </div>
+                            <span>UK-Wide Coverage</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="approach-image fade-in">
+                    <img src="Photos_Optimized/George Bank/IMG_6486..JPG" alt="Trade Partners">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container fade-in">
+            <h2>Ready to Start Your Project?</h2>
+            <p>Get in touch to discuss how our integrated approach can deliver your project from concept to completion.</p>
+            <a href="contact.html" class="btn btn-primary btn-large">Get in Touch</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-main">
+                <div class="footer-logo-wrapper">
+                    <img src="Logos/White The Aros.png" alt="AROS Design" class="footer-logo">
+                </div>
+                <nav class="footer-nav">
+                    <a href="services.html">Services</a>
+                    <a href="projects.html">Projects</a>
+                    <a href="about.html">About</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
+                <div class="footer-tagline">
+                    Turnkey Design & Technical Consultancy<br>United Kingdom
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; AROS Design 2025. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Terms</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
